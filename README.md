@@ -1,5 +1,9 @@
 # `cordova-plugin-ionic-migrate-ios-storage`
 
+Specific fixes to the original fork, allowing migration of file:// (no hostname, no port) to app://localhost LocalStorage. This probably isn't useful to anyone else.
+
+
+
 > Cordova plugin that migrates localStorage data from cordova-plugin-ionic-webview@1.X.X to cordova-plugin-ionic-webview@4.X.X and above. This works for iOS only!
 
 ## Installation
