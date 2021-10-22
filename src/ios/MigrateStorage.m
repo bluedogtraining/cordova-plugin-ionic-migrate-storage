@@ -17,20 +17,12 @@
 #define LOCALSTORAGE_DIRPATH @"WebKit/WebsiteData/LocalStorage/"
 
 #define DEFAULT_TARGET_HOSTNAME @"localhost"
-#define DEFAULT_TARGET_SCHEME @"ionic"
+#define DEFAULT_TARGET_SCHEME @"app"
 #define DEFAULT_TARGET_PORT_NUMBER @"0"
 
-#define DEFAULT_ORIGINAL_HOSTNAME @"localhost"
-#define DEFAULT_ORIGINAL_SCHEME @"http"
-#define DEFAULT_ORIGINAL_PORT_NUMBER @"8080"
-
-#define SETTING_TARGET_PORT_NUMBER @"WKPort"
-#define SETTING_TARGET_HOSTNAME @"Hostname"
-#define SETTING_TARGET_SCHEME @"iosScheme"
-
-#define SETTING_ORIGINAL_PORT_NUMBER @"MIGRATE_STORAGE_ORIGINAL_PORT_NUMBER"
-#define SETTING_ORIGINAL_HOSTNAME @"MIGRATE_STORAGE_ORIGINAL_HOSTNAME"
-#define SETTING_ORIGINAL_SCHEME @"MIGRATE_STORAGE_ORIGINAL_SCHEME"
+#define DEFAULT_ORIGINAL_HOSTNAME @""
+#define DEFAULT_ORIGINAL_SCHEME @"file"
+#define DEFAULT_ORIGINAL_PORT_NUMBER @"0"
 
 @interface MigrateStorage ()
     @property (nonatomic, assign) NSString *originalPortNumber;
@@ -173,35 +165,13 @@
 
     NSDictionary *cdvSettings = self.commandDelegate.settings;
 
-    self.originalPortNumber = [cdvSettings cordovaSettingForKey:SETTING_ORIGINAL_PORT_NUMBER];
-    if([self.originalPortNumber length] == 0) {
-        self.originalPortNumber = DEFAULT_ORIGINAL_PORT_NUMBER;
-    }
+    self.originalPortNumber = DEFAULT_ORIGINAL_PORT_NUMBER;
+    self.originalHostname = DEFAULT_ORIGINAL_HOSTNAME;
+    self.originalScheme = DEFAULT_ORIGINAL_SCHEME;
 
-    self.originalHostname = [cdvSettings cordovaSettingForKey:SETTING_ORIGINAL_HOSTNAME];
-    if([self.originalHostname length] == 0) {
-        self.originalHostname = DEFAULT_ORIGINAL_HOSTNAME;
-    }
-
-    self.originalScheme = [cdvSettings cordovaSettingForKey:SETTING_ORIGINAL_SCHEME];
-    if([self.originalScheme length] == 0) {
-        self.originalScheme = DEFAULT_ORIGINAL_SCHEME;
-    }
-
-    self.targetPortNumber = [cdvSettings cordovaSettingForKey:SETTING_TARGET_PORT_NUMBER];
-    if([self.targetPortNumber length] == 0) {
-        self.targetPortNumber = DEFAULT_TARGET_PORT_NUMBER;
-    }
-
-    self.targetHostname = [cdvSettings cordovaSettingForKey:SETTING_TARGET_HOSTNAME];
-    if([self.targetHostname length] == 0) {
-        self.targetHostname = DEFAULT_TARGET_HOSTNAME;
-    }
-
-    self.targetScheme = [cdvSettings cordovaSettingForKey:SETTING_TARGET_SCHEME];
-    if([self.targetScheme length] == 0) {
-        self.targetScheme = DEFAULT_TARGET_SCHEME;
-    }
+    self.targetPortNumber = DEFAULT_TARGET_PORT_NUMBER;
+    self.targetHostname = DEFAULT_TARGET_HOSTNAME;
+    self.targetScheme = DEFAULT_TARGET_SCHEME;
 
     [self migrateLocalStorage];
 
